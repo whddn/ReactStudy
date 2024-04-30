@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
@@ -38,13 +40,8 @@ function App() {
         </div> 
        </>
         } />
-        <Route path="/detail" element={<Detail/>} />
-
-        <Route path="/about" element={<About/>} />
-        <Route path="/about/member" element={<About/>} />
-        <Route path="/about/location" element={<About/>} />
-
-        <Route path="*" element={<div>없는페이지임</div>} />
+        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+               
       </Routes>
 
       
