@@ -1,14 +1,15 @@
 /*eslint-disable*/
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Nav } from 'react-bootstrap'
-
+import {Context1} from './../App.js'
 
 
 
 function Detail(props){
 
+  let {재고} = useContext(Context1)
   
   let {id} = useParams();
   let 찾은상품 = props.shoes.find(function(x){
@@ -43,6 +44,8 @@ function Detail(props){
           </div>
          : null
       }
+
+
       <button onClick={()=>{
         setCount(count+1)
       } }>버튼</button>
@@ -72,7 +75,7 @@ function Detail(props){
        eventKey="link2">버튼2</Nav.Link>
     </Nav.Item>
 </Nav>
-<TabContent tab={tab}/>
+<TabContent shoes={props.shoes} tab={tab}/>
 
 
 
@@ -80,9 +83,11 @@ function Detail(props){
   )
 };
 
-function TabContent({tab}){
+function TabContent({tab, shoes}){
 
   let [fade, setFade] = useState('')
+  let {재고} = useContext(Context1)
+  
   useEffect(()=>{
     setTimeout(()=>{ setFade('end') }, 10)
     
@@ -91,9 +96,10 @@ function TabContent({tab}){
     }
   }, [tab])
 
-  return (<div className={'start ' + fade}>
-    {  [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab] }
-  </div>)
+  return (
+    <div className={'start ' + fade}>
+      {  [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab] }
+    </div>)
 }
 
 export default Detail;
