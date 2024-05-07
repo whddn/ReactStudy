@@ -2,7 +2,7 @@
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import data from './data.js'
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
@@ -15,9 +15,13 @@ export let Context1 = createContext()
 
 function App() {
 
-  let [shoes, setShoes] = useState(data)
-  
+  useEffect(()=>{
 
+    localStorage.setItem('watched', JSON.stringify( [] ))
+  },[])
+
+  let [shoes, setShoes] = useState(data)
+  let [재고] = useState([10, 11, 12])
   let navigate = useNavigate();
 
   return (
