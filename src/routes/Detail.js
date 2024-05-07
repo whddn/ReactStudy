@@ -3,13 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Nav } from 'react-bootstrap'
-import {Context1} from './../App.js'
+import { addItem } from "../store";
+import { useDispatch } from "react-redux";
 
 
 
 function Detail(props){
 
-  let {재고} = useContext(Context1)
   
   let {id} = useParams();
   let 찾은상품 = props.shoes.find(function(x){
@@ -20,6 +20,7 @@ function Detail(props){
   let [alert, setAlert] = useState(true)
   let [tab, setTab ] = useState(0)
   let [fade2, setFade2] = useState('')
+  let dispatch = useDispatch()
 
   useEffect(()=>{
     setFade2('end')
@@ -57,7 +58,9 @@ function Detail(props){
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}원</p>
-          <button className="btn btn-danger">주문하기</button> 
+          <button className="btn btn-danger" onClick={()=>{
+            dispatch(addItem( {id : 1, name : 'Red Knit', count : 1 }))
+          }}>주문하기</button> 
         </div>
   </div>
 
@@ -86,8 +89,7 @@ function Detail(props){
 function TabContent({tab, shoes}){
 
   let [fade, setFade] = useState('')
-  let {재고} = useContext(Context1)
-  
+
   useEffect(()=>{
     setTimeout(()=>{ setFade('end') }, 10)
     
